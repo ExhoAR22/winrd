@@ -1,0 +1,6 @@
+x64
+ARM64
+Release
+Debug
+.vs
+*.user
