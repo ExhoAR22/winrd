@@ -1,2 +1,2 @@
-# winrd
+# WinRD
 RAM Disk for Windows
