@@ -10,19 +10,20 @@ on:
 env:
   SOLUTION_FILE_PATH: .
   BUILD_CONFIGURATION: Release
+  BUILD_PLATFORM: x64
 
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v2
-
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
-
     - name: Run MSBuild
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=$((env.BUILD_PLATFORM}} ${{env.SOLUTION_FILE_PATH}}
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        name: Binaries
+        path: x64
